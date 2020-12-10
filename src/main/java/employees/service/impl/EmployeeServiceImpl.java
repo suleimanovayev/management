@@ -6,6 +6,7 @@ import employees.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void create(Employee employee) {
-        employeeRepository.save(employee);
+    public Employee create(Employee employee) {
+      return  employeeRepository.save(employee);
     }
 
     @Override

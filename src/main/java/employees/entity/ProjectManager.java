@@ -12,8 +12,8 @@ import java.time.LocalDate;
 @DiscriminatorValue("Project_Manager")
 @NoArgsConstructor
 public class ProjectManager extends Employee {
-    public ProjectManager(String firstName, String lastName, Contact contact) {
-        super(firstName, lastName, contact);
+    public ProjectManager(String firstName, String lastName, BigDecimal salary, Contact contact) {
+        super(firstName, lastName, salary, contact);
     }
 
     public ProjectManager(String firstName, String lastName, String passwordHash, LocalDate lastEntryDate, BigDecimal salary, Contact contact) {

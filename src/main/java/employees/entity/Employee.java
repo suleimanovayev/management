@@ -3,7 +3,6 @@ package employees.entity;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -26,9 +25,10 @@ public abstract class Employee {
     @Embedded
     private Contact contact;
 
-    public Employee(String firstName, String lastName, Contact contact) {
+    public Employee(String firstName, String lastName, BigDecimal salary, Contact contact) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.salary = salary;
         this.contact = contact;
     }
 
@@ -86,7 +86,7 @@ public abstract class Employee {
     }
 
     public void setSalary(BigDecimal salary) {
-        if (salary.signum() <= 0 || salary == null) {
+        if (salary.signum() <= 0) {
             throw new IllegalArgumentException("Salary has to be grater then 0 and do not equals NULL");
         }
         this.salary = salary;

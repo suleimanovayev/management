@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class JavaDeveloper extends Employee {
 
-    public JavaDeveloper(String firstName, String lastName, Contact contact) {
-        super(firstName, lastName, contact);
+    public JavaDeveloper(String firstName, String lastName, BigDecimal salary, Contact contact) {
+        super(firstName, lastName, salary, contact);
     }
 
     public JavaDeveloper(String firstName, String lastName, String passwordHash, LocalDate lastEntryDate, BigDecimal salary, Contact contact) {

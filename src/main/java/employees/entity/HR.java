@@ -12,8 +12,8 @@ import java.time.LocalDate;
 @DiscriminatorValue("HR")
 @NoArgsConstructor
 public class HR extends Employee {
-    public HR(String firstName, String lastName, Contact contact) {
-        super(firstName, lastName, contact);
+    public HR(String firstName, String lastName, BigDecimal salary, Contact contact) {
+        super(firstName, lastName, salary, contact);
     }
 
     public HR(String firstName, String lastName, String passwordHash, LocalDate lastEntryDate, BigDecimal salary, Contact contact) {
