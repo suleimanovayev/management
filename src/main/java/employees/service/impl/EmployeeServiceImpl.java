@@ -1,12 +1,11 @@
 package employees.service.impl;
 
 import employees.dao.EmployeeRepository;
-import employees.entity.Employee;
 import employees.service.EmployeeService;
+import employees.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -37,6 +36,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee getEmployeeById(Long id) {
         return employeeRepository.getById(id);
+    }
+
+    @Override
+    public Employee getEmployeeByFirstName(String firstName) {
+        return employeeRepository.getEmployeeByFirstName(firstName);
     }
 
     @Override

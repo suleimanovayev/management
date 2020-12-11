@@ -17,7 +17,7 @@ public class JavaDeveloper extends Employee {
         super(firstName, lastName, salary, contact);
     }
 
-    public JavaDeveloper(String firstName, String lastName, String passwordHash, LocalDate lastEntryDate, BigDecimal salary, Contact contact) {
-        super(firstName, lastName, passwordHash, lastEntryDate, salary, contact);
+    public JavaDeveloper(String firstName, String lastName, String passwordHash) {
+        super(firstName, lastName, passwordHash);
     }
 }

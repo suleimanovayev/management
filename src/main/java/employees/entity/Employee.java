@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import static java.util.Objects.isNull;
+
 @SuppressWarnings("PMD")
 @Entity(name = "employees")
 @Inheritance
@@ -26,19 +28,17 @@ public abstract class Employee {
     private Contact contact;
 
     public Employee(String firstName, String lastName, BigDecimal salary, Contact contact) {
+        isValidSalary(salary);
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
         this.contact = contact;
     }
 
-    public Employee(String firstName, String lastName, String passwordHash, LocalDate lastEntryDate, BigDecimal salary, Contact contact) {
+    public Employee(String firstName, String lastName, String passwordHash) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.passwordHash = passwordHash;
-        this.lastEntryDate = lastEntryDate;
-        this.salary = salary;
-        this.contact = contact;
     }
 
     public Long getId() {
@@ -86,10 +86,15 @@ public abstract class Employee {
     }
 
     public void setSalary(BigDecimal salary) {
-        if (salary.signum() <= 0) {
+        isValidSalary(salary);
+        this.salary = salary;
+    }
+
+    private boolean isValidSalary(BigDecimal salary) {
+        if (isNull(salary) || salary.compareTo(BigDecimal.ONE) < 0) {
             throw new IllegalArgumentException("Salary has to be grater then 0 and do not equals NULL");
         }
-        this.salary = salary;
+        return true;
     }
 
     public Contact getContact() {

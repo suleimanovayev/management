@@ -1,10 +1,10 @@
-package employees.management.dao;
+package employees.dao;
 
+import employees.service.EmployeeService;
 import employees.entity.Contact;
 import employees.entity.Employee;
 import employees.entity.HR;
 import employees.entity.JavaDeveloper;
-import employees.service.EmployeeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +13,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 @RunWith(SpringRunner.class)
@@ -46,12 +46,12 @@ public class EmployeeRepositoryTest {
 
     @Test
     public void findByIdTest() {
-        Employee hrEmployee = new HR("Alisa", "Lane", new BigDecimal(134), new Contact("Vancouver", "45-19-68"));
+        Employee hrEmployee = new HR("Alisa", "Lane", new BigDecimal("500.15"), new Contact("Vancouver", "45-19-68"));
         Employee hrDbEmployee = employeeService.create(hrEmployee);
 
         assertThat(employeeService.getEmployeeById(hrDbEmployee.getId())).isNotNull();
         assertThat(employeeService.getEmployeeById(hrDbEmployee.getId())).isEqualTo(hrDbEmployee);
-
+        assertEquals(employeeService.getEmployeeById(hrDbEmployee.getId()).getSalary().compareTo(hrDbEmployee.getSalary()), 0);
     }
 
     @Test
@@ -62,16 +62,13 @@ public class EmployeeRepositoryTest {
         assertThat(employeeService.getAllSalaries()).isNotEmpty();
         assertThat(employeeService.getAllSalaries()).isNotNull();
         assertThat(employeeService.getAllSalaries().size()).isEqualTo(salaries.size());
-        assertThat(employeeService.getAllSalaries()).isEqualTo(salaries);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSalaryNullException() {
-        new HR("Alisa", "Lane", null, new Contact("Vancouver", "45-19-68"));
-    }
+    @Test
+    public void findByNameTest() {
+        Employee employee = new JavaDeveloper("Melissa", "White", new BigDecimal("1100.00"), new Contact("London", "32-84-45"));
+        employeeService.create(employee);
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSalaryEmptyException() {
-        new HR("Alisa", "Lane", new BigDecimal(0), new Contact("Vancouver", "45-19-68"));
+        assertThat(employeeService.getEmployeeByFirstName("Melissa")).isEqualTo(employee);
     }
 }

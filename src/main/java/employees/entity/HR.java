@@ -16,7 +16,7 @@ public class HR extends Employee {
         super(firstName, lastName, salary, contact);
     }
 
-    public HR(String firstName, String lastName, String passwordHash, LocalDate lastEntryDate, BigDecimal salary, Contact contact) {
-        super(firstName, lastName, passwordHash, lastEntryDate, salary, contact);
+    public HR(String firstName, String lastName, String passwordHash) {
+        super(firstName, lastName, passwordHash);
     }
 }
