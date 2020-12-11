@@ -8,13 +8,13 @@ import org.springframework.data.repository.query.Param;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeJpaRepository extends JpaRepository<Employee, Long> {
 
     Employee getById(Long id);
 
     @Query(value = "select salary from employees", nativeQuery = true)
     List<BigDecimal> getAllSalaries();
 
-    @Query(value = "select * from employees e where first_name = :firstName", nativeQuery = true)
-    Employee getEmployeeByFirstName(@Param("firstName") String firstName);
+    @Query(value = "select * from employees e where first_name like concat('%', :firstName, '%')", nativeQuery = true)
+    List<Employee> getEmployeeByFirstName(@Param("firstName") String firstName);
 }
