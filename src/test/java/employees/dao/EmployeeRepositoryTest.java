@@ -1,10 +1,10 @@
 package employees.dao;
 
-import employees.service.EmployeeService;
 import employees.entity.Contact;
 import employees.entity.Employee;
 import employees.entity.HR;
 import employees.entity.JavaDeveloper;
+import employees.service.EmployeeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,9 +67,10 @@ public class EmployeeRepositoryTest {
 
     @Test
     public void findByNameTest() {
-        Employee employee = new JavaDeveloper("Melissa", "White", new BigDecimal("1100.00"), new Contact("London", "32-84-45"));
-        employeeService.create(employee);
+        List<Employee> employees =
+                Collections.singletonList(new JavaDeveloper("Melissa", "White", new BigDecimal("1100.00"), new Contact("London", "32-84-45")));
+        employees.forEach(javaDeveloper -> employeeService.create(javaDeveloper));
 
-        assertThat(employeeService.getEmployeeByFirstName("Melissa")).isEqualTo(employee);
+        assertThat(employeeService.getEmployeeByFirstName("Melissa")).isEqualTo(employees);
     }
 }

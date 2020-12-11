@@ -1,6 +1,7 @@
 package employees.service.impl;
 
-import employees.dao.EmployeeRepository;
+import employees.dao.EmployeeDao;
+import employees.dao.EmployeeJpaRepository;
 import employees.service.EmployeeService;
 import employees.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeDao, EmployeeService {
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private EmployeeJpaRepository employeeRepository;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeJpaRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
@@ -39,7 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeeByFirstName(String firstName) {
+    public List<Employee> getEmployeeByFirstName(String firstName) {
         return employeeRepository.getEmployeeByFirstName(firstName);
     }
 

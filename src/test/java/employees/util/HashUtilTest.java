@@ -1,4 +1,4 @@
-package employees;
+package employees.util;
 
 import employees.util.HashUtil;
 import org.junit.Test;

@@ -1,23 +1,13 @@
 package employees.service;
 
+import employees.dao.EmployeeDao;
 import employees.entity.Employee;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface EmployeeService {
-
-    Employee create(Employee employee);
-
-    List<Employee> getAllEmployees();
-
+public interface EmployeeService extends EmployeeDao {
     List<BigDecimal> getAllSalaries();
 
-    Employee getEmployeeById(Long id);
-
-    Employee getEmployeeByFirstName(String firstName);
-
     void update(Employee employee);
-
-    void deleteEmployee(Long id);
 }
